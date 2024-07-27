@@ -1,4 +1,4 @@
-package test
+package pkg
 
 import (
 	"json_parser/pkg"
