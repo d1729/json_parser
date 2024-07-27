@@ -8,7 +8,7 @@ import (
 type ParseResult struct {
 	JsonArray  []interface{}
 	JsonObject map[interface{}]interface{}
-	token      interface{}
+	Token      interface{}
 }
 
 func parseArray(tokens []interface{}) (ParseResult, []interface{}) {
@@ -23,7 +23,7 @@ func parseArray(tokens []interface{}) (ParseResult, []interface{}) {
 
 	for {
 		newToken, tempTokens := Parse(tokens)
-		json := newToken.token
+		json := newToken.Token
 		if newToken.JsonArray != nil {
 			json = newToken.JsonArray
 		} else if newToken.JsonObject != nil {
@@ -67,7 +67,7 @@ func parseObject(tokens []interface{}) (ParseResult, []interface{}) {
 		}
 
 		newToken, tempTokens := Parse(tokens[1:])
-		jsonValue := newToken.token
+		jsonValue := newToken.Token
 		if newToken.JsonArray != nil {
 			jsonValue = newToken.JsonArray
 		} else if newToken.JsonObject != nil {
@@ -97,6 +97,6 @@ func Parse(tokens []interface{}) (ParseResult, []interface{}) {
 	} else if t == JsonLeftBrace {
 		return parseObject(tokens[1:])
 	} else {
-		return ParseResult{token: t}, tokens[1:]
+		return ParseResult{Token: t}, tokens[1:]
 	}
 }
